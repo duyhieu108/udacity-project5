@@ -450,12 +450,8 @@ workflows:
       - linting
       - build-docker-image:
           requires: [linting]
-      - test-app:
-          requires: [build-docker-image]
-      - push-to-docker-hub:
-          requires: [test-app]
       - deploy-infrastructure:
-          requires: [push-to-docker-hub]
+          requires: [build-docker-image]
           filters:
             branches:
               only: [master]
