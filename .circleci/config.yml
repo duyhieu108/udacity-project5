@@ -34,7 +34,7 @@ orbs:
 jobs:
   linting:
     docker:
-      - image: node:18-alpine
+      - image: python:3.7.3-stretch
     steps:
       - checkout
       - run:
