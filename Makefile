@@ -1,7 +1,6 @@
-setup:
-	# Create python virtualenv & source it
+check_env:
+	# Check npm version
 	npm -version
-	npm audit fix --force --audit-level=critical
 
 install:
 	# Install JSlint
@@ -20,4 +19,4 @@ lint:
 	# This should be run from inside a virtualenv
 	jslint src/index.js
 
-all: setup install lint
+all: check_env install lint
