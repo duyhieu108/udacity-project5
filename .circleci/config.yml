@@ -51,30 +51,30 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - restore_cache:
-          keys:
-            - v1-{{ .Branch }}
-          paths:
-            - /caches/myapp.tar
-      - run:
-          name: Load Docker image layer cache
-          command: |
-            set +o pipefail
-            docker load -i /caches/myapp.tar | true
+      #- restore_cache:
+      #    keys:
+      #      - v1-{{ .Branch }}
+      #    paths:
+      #      - /caches/myapp.tar
+      #- run:
+      #    name: Load Docker image layer cache
+      #    command: |
+      #      set +o pipefail
+      #      docker load -i /caches/myapp.tar | true
       - run:
           name: Build docker image
           command: |
-            docker build --cache-from=myapp --tag=myapp .
+            docker build --tag=myapp .
             docker images
-      - run:
-          name: Save Docker image layer cache
-          command: |
-            mkdir -p /caches
-            docker save -o /caches/myapp.tar myapp
-      - save_cache:
-          key: v1-{{ .Branch }}-{{ epoch }}
-          paths:
-            - /caches/myapp.tar
+      #- run:
+      #    name: Save Docker image layer cache
+      #    command: |
+      #      mkdir -p /caches
+      #      docker save -o /caches/myapp.tar myapp
+      #- save_cache:
+      #    key: v1-{{ .Branch }}-{{ epoch }}
+      #    paths:
+      #      - /caches/myapp.tar
       - run:
           name: Run docker image
           command: |
