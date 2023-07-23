@@ -49,6 +49,7 @@ jobs:
       - image: docker:cli
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Build docker image
           command: |
