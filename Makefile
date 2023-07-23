@@ -4,7 +4,7 @@ check_env:
 
 install:
 	# Install JSlint
-	npm install jslint -g
+	sudo npm install jslint -g
 
 	# Install hadolint
 	wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64
