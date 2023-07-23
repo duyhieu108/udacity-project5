@@ -1,6 +1,6 @@
 setup:
 	# Create python virtualenv & source it
-	apt install npm
+	npm -version
 	npm audit fix --force --audit-level=critical
 
 install:
