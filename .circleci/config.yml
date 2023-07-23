@@ -67,7 +67,7 @@ jobs:
             echo "Docker ID and Image: $docker_path"
 
             echo mypw=$mypw >> .env
-            echo mypw
+            echo $mypw
             cat .env
             echo "mypw=$mypw" | docker login -u $docker_path --password-stdin
             
