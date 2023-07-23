@@ -65,9 +65,13 @@ jobs:
             docker_path=hieudd
             
             echo "Docker ID and Image: $docker_path"
+
+            echo mypw=$mypw >> .env
+            echo mypw
+            cat .env
             echo "mypw=$mypw" | docker login -u $docker_path --password-stdin
             
-            docker image tag "pyapp:latest" "$docker_path/myapp:project5"
+            docker image tag "myapp:project5" "$docker_path/myapp:project5"
 
             docker image push "$docker_path/myapp:project5"
 
