@@ -46,25 +46,29 @@ jobs:
 
   build-docker-image:
     docker:
-      - image: amazon/aws-cli
+      - image: docker
     steps:
       - checkout
       - run:
           name: Build docker image
           command: |
-            exit 1
+            docker build --tag=myapp .
+            docker images
+      - run:
+          name: Run docker image
+          command: |
+            docker run -dp 3000:3000 myapp
+      - run:
+          name: Push docker image
+          command: |
+            docker_path=hieudd
+            
+            echo "Docker ID and Image: $docker_path"
+            echo "mypw=$mypw" | docker login -u $docker_path --password-stdin
+            
+            docker image tag "pyapp:latest" "$docker_path/myapp:project5"
 
-  test-app:
-    docker:
-      - image: amazon/aws-cli
-    steps:
-      - checkout
-
-  push-to-docker-hub:
-    docker:
-      - image: amazon/aws-cli
-    steps:
-      - checkout
+            docker image push "$docker_path/myapp:project5"
 
 #  build-frontend:
 #    docker:

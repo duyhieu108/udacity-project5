@@ -11,12 +11,12 @@ install:
 	sudo chmod +x /bin/hadolint
 
 lint:
-	# See local hadolint install instructions:   https://github.com/hadolint/hadolint
+	# See local hadolint install instructions: https://github.com/hadolint/hadolint
 	# This is linter for Dockerfiles
 	hadolint Dockerfile
 
-	# This is a linter for Python source code linter: https://www.pylint.org/
-	# This should be run from inside a virtualenv
+	# This is a linter for JS source code linter: https://www.jslint.com/
+	# This should be run with JS file code
 	jslint src/index.js
 
 all: check_env install lint
