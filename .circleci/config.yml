@@ -45,16 +45,36 @@ jobs:
             make all
 
   build-docker-image:
+    working_directory: /myapp
     docker:
       - image: docker:cli
     steps:
       - checkout
       - setup_remote_docker
+      - restore_cache:
+          keys:
+            - v1-{{ .Branch }}
+          paths:
+            - /caches/myapp.tar
+      - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i /caches/myapp.tar | true
       - run:
           name: Build docker image
           command: |
-            docker build --tag=myapp .
+            docker build --cache-from=myapp --tag=myapp .
             docker images
+      - run:
+          name: Save Docker image layer cache
+          command: |
+            mkdir -p /caches
+            docker save -o /caches/app.tar app
+      - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /caches/myapp.tar
       - run:
           name: Run docker image
           command: |
@@ -63,15 +83,11 @@ jobs:
           name: Push docker image
           command: |
             docker_path=hieudd
-            
             echo "Docker ID and Image: $docker_path"
-
             export mypw=hnplhh1008
             echo "$mypw" | docker login -u $docker_path --password-stdin
-            
-            docker image tag "myapp:project5" "$docker_path/myapp:project5"
-
-            docker image push "$docker_path/myapp:project5"
+            docker image tag "myapp:latest" "$docker_path/myapp:${CIRCLE_WORKFLOW_ID:0:7}"
+            docker image push "$docker_path/myapp:${CIRCLE_WORKFLOW_ID:0:7}"
 
 #  build-frontend:
 #    docker:
