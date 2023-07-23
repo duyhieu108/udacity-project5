@@ -46,7 +46,7 @@ jobs:
 
   build-docker-image:
     docker:
-      - image: docker:dind
+      - image: docker:cli
     steps:
       - checkout
       - run:
