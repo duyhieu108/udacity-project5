@@ -193,8 +193,15 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-#      - run: yum install -y tar gzip
-#      - run:
+      - run: yum install -y tar gzip
+      - run:
+          name: install eks
+          command: |
+            curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+            sudo mv /tmp/eksctl /usr/local/bin
+            sudo chown -R $(whoami) /usr/local/<directory_name>
+            pwd
+            ls
 #          name: Ensure back-end infrastructure exists
 #          command: |
 #            aws cloudformation deploy \
