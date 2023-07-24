@@ -193,7 +193,7 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      - run: yum install -y tar gzip
+      #- run: yum install -y tar gzip
       - run:
           name: install eks
           command: |
@@ -474,19 +474,34 @@ jobs:
 workflows:
   default:
     jobs:
-      - linting
-      - build-docker-image:
-          requires: [linting]
+      #- linting
+      #- build-docker-image:
+      #    requires: [linting]
+      #    filters:
+      #      branches:
+      #        only: [main]
       - deploy-infrastructure:
-          requires: [build-docker-image]
+      #    requires: [build-docker-image]
           filters:
             branches:
               only: [main]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
+          filters:
+            branches:
+              only: [master]
       - smoke-test:
           requires: [configure-infrastructure]
+          filters:
+            branches:
+              only: [master]
       - cloudfront-update:
           requires: [smoke-test]
+          filters:
+            branches:
+              only: [master]
       - cleanup:
           requires: [cloudfront-update]
+          filters:
+            branches:
+              only: [master]
