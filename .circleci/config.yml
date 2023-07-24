@@ -205,7 +205,15 @@ jobs:
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install
-
+      - run:
+          name: Check aws
+          command: |
+             pwd
+             ls
+             whoami
+             aws configure list
+             aws cloudformation list-stacks
+             aws iam list-users
 #          name: Ensure back-end infrastructure exists
 #          command: |
 #            aws cloudformation deploy \
