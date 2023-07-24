@@ -198,7 +198,7 @@ jobs:
           command: |
             pwd
             ls
-            curl --location "https://github.com/eksctl-io/eksctl/releases/download/v0.150.0/eksctl_amd64.tar.gz" | tar xzv -C /tmp
+            curl --location "https://github.com/eksctl-io/eksctl/releases/download/v0.150.0/eksctl_Linux_amd64.tar.gz" | tar xzv -C /tmp
             sudo mv /tmp/eksctl /usr/local/bin
             sudo chown -R $(whoami) /usr/local/<directory_name>
 #          name: Ensure back-end infrastructure exists
