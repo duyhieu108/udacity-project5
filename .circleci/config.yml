@@ -197,11 +197,12 @@ jobs:
       - run:
           name: install eks
           command: |
-            curl --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xzvf -C /tmp
-            sudo mv /tmp/eksctl /usr/local/bin
-            sudo chown -R $(whoami) /usr/local/<directory_name>
             pwd
             ls
+            sudo curl --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" --output /tmp/output
+            sudo tar zxvf /tmp/output
+            sudo mv /tmp/eksctl /usr/local/bin
+            sudo chown -R $(whoami) /usr/local/<directory_name>
 #          name: Ensure back-end infrastructure exists
 #          command: |
 #            aws cloudformation deploy \
