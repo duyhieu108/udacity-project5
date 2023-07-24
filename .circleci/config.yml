@@ -197,7 +197,7 @@ jobs:
       - run:
           name: install eks
           command: |
-            curl --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xzv -C /tmp
+            curl --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xzvf -C /tmp
             sudo mv /tmp/eksctl /usr/local/bin
             sudo chown -R $(whoami) /usr/local/<directory_name>
             pwd
