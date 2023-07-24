@@ -198,7 +198,8 @@ jobs:
           command: |
             pwd
             ls
-            curl --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xzv -C /tmp
+            curl --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" --output /tmp/output
+            sudo tar xzvf /tmp/output
             sudo mv /tmp/eksctl /usr/local/bin
             sudo chown -R $(whoami) /usr/local/<directory_name>
 #          name: Ensure back-end infrastructure exists
