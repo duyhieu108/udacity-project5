@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: project5-deployment2
+  name: myapp
   labels:
-    app: project5-service
+    app: myapp
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: project5-service
+      app: myapp
   template:
     metadata:
       labels:
-        app: project5-service
+        app: myapp
     spec:
       containers:
-      - name: web
+      - name: myapp
         image: hieudd/myapp
         ports:
-          - name: web
+          - name: http-server
             containerPort: 3000
