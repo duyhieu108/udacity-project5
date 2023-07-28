@@ -17,7 +17,7 @@ spec:
         role: rolling-update
     spec:
       containers:
-      - image: hieudd/myapp:latest
+      - image: hieudd/myapp:5dbc4cf
         name: newcontainer
         imagePullPolicy: Always
         ports:

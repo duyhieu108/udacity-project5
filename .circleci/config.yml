@@ -159,20 +159,6 @@ jobs:
       - image: cimg/base:2021.04
     steps:
       - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            pwd
-            ls
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            sudo ./aws/install
-      - run:
-          name: set-credential
-          command: |
-            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-            aws configure set region $AWS_DEFAULT_REGION
       - kubernetes/install-kubectl
       - aws-eks/update-kubeconfig-with-authenticator:
           cluster-name: eks-demo-deployment2
@@ -185,7 +171,7 @@ jobs:
       #- run:
       #    command: |
       #      kubectl get nodes
-      #      kubectl create deploy myapp2 --image=hieudd/myapp:latest
+      #      kubectl create deploy myapp2 --image=hieudd/myapp:5dbc4cf
       #      kubectl get deploy,rs,svc,pods
 
   smoke-test:
