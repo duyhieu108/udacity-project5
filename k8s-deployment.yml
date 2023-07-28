@@ -1,23 +1,23 @@
 ---
-apiVersion: myapp/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s-project5-1bb0788
+  name: project5-deployment
   labels:
-    app: k8s-project5-1bb0788
+    app: project5-service
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: k8s-project5-1bb0788
+      app: project5-service
   template:
     metadata:
       labels:
-        app: k8s-project5-1bb0788
+        app: project5-service
     spec:
       containers:
-      - name: k8s-project5-1bb0788
+      - name: web
         image: hieudd/myapp:latest
         ports:
-          - name: k8s-project5-1bb0788
+          - name: web
             containerPort: 3000
