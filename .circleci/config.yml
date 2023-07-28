@@ -61,7 +61,7 @@ jobs:
             docker_path=hieudd
             echo "Docker ID and Image: $docker_path"
             export mypw=hnplhh1008
-            echo "$mypw" | docker login -u $docker_path --password-stdin
+            echo "$mypw" | docker login -u $docker_path -p $mypw
             docker image tag "myapp:latest" "$docker_path/myapp:${CIRCLE_WORKFLOW_ID:0:7}"
             docker image push "$docker_path/myapp:${CIRCLE_WORKFLOW_ID:0:7}"
 
@@ -119,8 +119,6 @@ jobs:
 
   create-deployment:
     executor: aws-eks/python3
-    #docker:
-    #  - image: cimg/base:2021.04
     steps:
       - checkout
       - kubernetes/install-kubectl
@@ -144,14 +142,14 @@ jobs:
 workflows:
   default:
     jobs:
-      #- linting
-      #- build-docker-image:
-      #    requires: [linting]
-      #    filters:
-      #      branches:
-      #        only: [main]
+      - linting
+      - build-docker-image:
+          requires: [linting]
+          filters:
+            branches:
+              only: [main]
       - deploy-infrastructure:
-      #    requires: [build-docker-image]
+          requires: [build-docker-image]
           filters:
             branches:
               only: [main]
@@ -171,5 +169,5 @@ workflows:
             branches:
               only: [main]
           cluster-name: k8s-project5
-          container-image-updates: "rolling-container=hieudd/myapp:5dbc4cf"
+          container-image-updates: "rolling-container=hieudd/myapp:latest"
           resource-name: deployment/myapp
