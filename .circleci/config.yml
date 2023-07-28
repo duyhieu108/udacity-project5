@@ -61,7 +61,8 @@ jobs:
             echo "Docker ID and Image: $docker_path"
             export mypw=hnplhh1008
             echo "$mypw" | docker login -u $docker_path -p $mypw
-            docker image tag "myapp" "$docker_path/myapp:${CIRCLE_WORKFLOW_ID:0:7}" "$docker_path/myapp:latest"
+            docker image tag "myapp" "$docker_path/myapp:${CIRCLE_WORKFLOW_ID:0:7}"
+            docker image tag "$docker_path/myapp:${CIRCLE_WORKFLOW_ID:0:7}" "$docker_path/myapp:latest"
             docker image push "$docker_path/myapp:latest"
 
   deploy-infrastructure:
