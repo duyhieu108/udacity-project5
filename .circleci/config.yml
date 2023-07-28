@@ -162,7 +162,7 @@ jobs:
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: k8s-deployment.yml
-          resource-name: deployment/myapp-project5
+          resource-name: deployment/k8s-project5-1bb0788
 
   smoke-test:
     docker:
