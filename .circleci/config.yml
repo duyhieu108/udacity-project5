@@ -96,7 +96,7 @@ jobs:
       - run:
           name: create k8s cluster
           command: |
-            eksctl create cluster --region us-east-2 --name k8s-project5 --nodegroup-name k8s-project5 --instance-types=t2.micro --nodes 2 --managed
+            #eksctl create cluster --region us-east-2 --name k8s-project5 --nodegroup-name k8s-project5 --instance-types=t2.micro --nodes 2 --managed
             aws eks update-kubeconfig --region us-east-2 --name k8s-project5
 
   configure-infrastructure:
@@ -170,6 +170,6 @@ workflows:
           filters:
             branches:
               only: [main]
-          cluster-name: nginxcustomcluster1
+          cluster-name: k8s-project5
           container-image-updates: "rolling-container=hieudd/myapp:5dbc4cf"
           resource-name: deployment/myapp
