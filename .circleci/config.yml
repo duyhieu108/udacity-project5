@@ -181,6 +181,7 @@ jobs:
           get-rollout-status: true
           resource-file-path: k8s-deployment.yml
           resource-name: deployment/project5-deployment2
+          show-kubectl-command: true
 
   smoke-test:
     docker:
