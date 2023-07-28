@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: hieudd/myapp:latest
+        image: hieudd/myapp
         ports:
           - name: web
             containerPort: 3000
