@@ -14,10 +14,20 @@ spec:
     metadata:
       labels:
         app: myapp
+        role: rolling-update
     spec:
       containers:
-      - name: myapp
-        image: hieudd/myapp
+      - image: hieudd/myapp:latest
+        name: newcontainer
+        imagePullPolicy: Always
         ports:
-          - name: http-server
-            containerPort: 3000
+          - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
