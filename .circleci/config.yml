@@ -118,7 +118,6 @@ jobs:
              ls
              whoami
              aws configure list
-             aws cloudformation list-stacks
              aws iam list-users
              eksctl version
 
