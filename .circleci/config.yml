@@ -299,7 +299,7 @@ workflows:
             branches:
               only: [master]
       - create-deployment:
-          requires: [configure-infrastructure]
+#          requires: [configure-infrastructure]
           filters:
             branches:
               only: [main]
