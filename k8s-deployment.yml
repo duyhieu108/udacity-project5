@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - image: hieudd/myapp:5dbc4cf
-        name: newcontainer
+        name: rolling-container
         imagePullPolicy: Always
         ports:
           - containerPort: 3000
