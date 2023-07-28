@@ -1,0 +1,23 @@
+---
+apiVersion: myapp/v1
+kind: Deployment
+metadata:
+  name: myapp-project5
+  labels:
+    app: myapp-project5
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp-project5
+  template:
+    metadata:
+      labels:
+        app: myapp-project5
+    spec:
+      containers:
+      - name: myapp-project5
+        image: hieudd/myapp:latest
+        ports:
+          - name: myapp-project5
+            containerPort: 3000
