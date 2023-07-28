@@ -140,6 +140,11 @@ jobs:
     executor: aws-eks/python3
     steps:
       - checkout
+      - run:
+        command: |
+        pwd
+        whoami
+        ls
       - aws-eks/update-kubeconfig-with-authenticator:
           cluster-name: k8s-project5-${CIRCLE_WORKFLOW_ID:0:7}
           install-kubectl: true
@@ -277,9 +282,9 @@ workflows:
       #    requires: [build-docker-image]
           filters:
             branches:
-              only: [main]
+              only: [master]
       - configure-infrastructure:
-          requires: [deploy-infrastructure]
+      #    requires: [deploy-infrastructure]
           filters:
             branches:
               only: [main]
