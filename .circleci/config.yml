@@ -138,7 +138,9 @@ jobs:
       #    ssh-public-key: ''
 
   configure-infrastructure:
-    executor: aws-eks/python3
+    #executor: aws-eks/python3
+    docker:
+      - image: cimg/base:2021.04
     steps:
       - checkout
       - run:
