@@ -222,7 +222,7 @@ jobs:
           release-tag: ''
       - aws-eks/create-cluster:
           cluster-name: k8s-project5-${CIRCLE_WORKFLOW_ID:0:7}
-          install-kubectl: true
+          skip-kubectl-install: false
           verbose: 3
           node-type: t2.micro
           nodes-max: 2
