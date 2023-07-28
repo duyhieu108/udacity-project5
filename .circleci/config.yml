@@ -157,6 +157,13 @@ jobs:
     executor: aws-eks/python3
     steps:
       - checkout
+      - run:
+          name: set-credential
+          command: |
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+            aws configure set region $AWS_DEFAULT_REGION
+      - kubernetes/install-kubectl
       - aws-eks/update-kubeconfig-with-authenticator:
           cluster-name: k8s-project5-1bb0788
           install-kubectl: true
@@ -283,12 +290,12 @@ workflows:
       #    requires: [build-docker-image]
           filters:
             branches:
-              only: [main]
+              only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
           filters:
             branches:
-              only: [main]
+              only: [master]
       - create-deployment:
           requires: [configure-infrastructure]
           filters:
