@@ -124,8 +124,8 @@ jobs:
       - run:
           name: create k8s cluster
           command: |
-            eksctl create cluster --region us-east-2 --name eks-demo-deployment2 --nodegroup-name eks-demo-deployment2 --instance-types=t2.small --nodes 2 --ssh-access --ssh-public-key udacity-project5 --managed
-            aws eks update-kubeconfig --region us-east-1 --name keks-demo-deployment
+            eksctl create cluster --region us-east-2 --name eks-demo-deployment2 --nodegroup-name eks-demo-deployment2 --instance-types=t2.small --nodes 2 --managed
+            aws eks update-kubeconfig --region us-east-2 --name keks-demo-deployment2
       #- aws-eks/install-aws-iam-authenticator:
       #    release-tag: ''
       #- aws-eks/create-cluster:
