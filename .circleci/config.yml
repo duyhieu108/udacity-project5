@@ -184,7 +184,9 @@ jobs:
       #    show-kubectl-command: true
       - run:
           command: |
+            kubectl get nodes
             kubectl create deploy myapp2 --image=hieudd/myapp:5dbc4cf
+            kubectl get deploy,rs,svc,pods
 
   smoke-test:
     docker:
