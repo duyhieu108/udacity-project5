@@ -184,7 +184,7 @@ jobs:
       #    show-kubectl-command: true
       - run:
           command: |
-            kubectl apply -f k8s-deployment.yml
+            kubectl create deploy myapp --image=hieudd/myapp:5dbc4cf
 
   smoke-test:
     docker:
