@@ -119,7 +119,7 @@ jobs:
              aws configure list
              aws cloudformation list-stacks
              aws iam list-users
-             eksctl create cluster --region us-east-1 --name aws-k8s-cluster --nodegroup-name aws-k8s-cluster --instance-types=t2.micro --nodes 2 --ssh-access --ssh-public-key udacity-project5 --managed
+             sudo eksctl create cluster --name aws-k8s-cluster --nodegroup-name aws-k8s-cluster --instance-types=t2.micro --nodes 2 --ssh-access --ssh-public-key udacity-project5 --managed
       #- aws-eks/install-aws-iam-authenticator:
       #    release-tag: ''
       #- aws-eks/create-cluster:
