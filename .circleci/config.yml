@@ -103,15 +103,16 @@ jobs:
           command: |
             pwd
             ls
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+
             curl --location "https://github.com/eksctl-io/eksctl/releases/download/v0.150.0/eksctl_Linux_amd64.tar.gz" | tar xzv -C /tmp
             sudo chown -R $(whoami) /usr/local/bin
             sudo mv /tmp/eksctl /usr/local/bin
 
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            sudo ./aws/install
       - run:
-          name: Check aws
+          name: Check aws/eks installed
           command: |
              pwd
              ls
@@ -119,6 +120,11 @@ jobs:
              aws configure list
              aws cloudformation list-stacks
              aws iam list-users
+             eksctl version
+
+      - run:
+          name: create k8s cluster
+          command: |
              sudo eksctl create cluster --name aws-k8s-cluster --nodegroup-name aws-k8s-cluster --instance-types=t2.micro --nodes 2 --ssh-access --ssh-public-key udacity-project5 --managed
       #- aws-eks/install-aws-iam-authenticator:
       #    release-tag: ''
