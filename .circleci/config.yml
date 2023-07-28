@@ -124,8 +124,8 @@ jobs:
       - run:
           name: create k8s cluster
           command: |
-            eksctl create cluster --region us-east-1 --name k8s-project5-1bb0788 --nodegroup-name k8s-project5-1bb0788 --instance-types=t2.micro --nodes 2 --ssh-access --ssh-public-key udacity-project5 --managed
-            aws eks update-kubeconfig --region us-east-1 --name k8s-project5-1bb0788
+            eksctl create cluster --region us-east-1 --name eks-demo-deployment --nodegroup-name eks-demo-deployment --instance-types=t2.micro --nodes 2 --ssh-access --ssh-public-key udacity-project5 --managed
+            aws eks update-kubeconfig --region us-east-1 --name keks-demo-deployment
       #- aws-eks/install-aws-iam-authenticator:
       #    release-tag: ''
       #- aws-eks/create-cluster:
@@ -147,7 +147,7 @@ jobs:
             whoami
             ls
       - aws-eks/update-kubeconfig-with-authenticator:
-          cluster-name: k8s-project5-1bb0788
+          cluster-name: eks-demo-deployment
           install-kubectl: true
       - kubernetes/create-or-update-resource:
           resource-file-path: k8s-services.yml
@@ -175,18 +175,18 @@ jobs:
             aws configure set region $AWS_DEFAULT_REGION
       - kubernetes/install-kubectl
       - aws-eks/update-kubeconfig-with-authenticator:
-          cluster-name: k8s-project5-1bb0788
+          cluster-name: eks-demo-deployment
           install-kubectl: true
-      #- kubernetes/create-or-update-resource:
-      #    get-rollout-status: true
-      #    resource-file-path: k8s-deployment.yml
-      #    resource-name: deployment/myapp
-      #    show-kubectl-command: true
-      - run:
-          command: |
-            kubectl get nodes
-            kubectl create deploy myapp2 --image=hieudd/myapp:5dbc4cf
-            kubectl get deploy,rs,svc,pods
+      - kubernetes/create-or-update-resource:
+          get-rollout-status: true
+          resource-file-path: k8s-deployment.yml
+          resource-name: deployment/myapp
+          show-kubectl-command: true
+      #- run:
+      #    command: |
+      #      kubectl get nodes
+      #      kubectl create deploy myapp2 --image=hieudd/myapp:latest
+      #      kubectl get deploy,rs,svc,pods
 
   smoke-test:
     docker:
