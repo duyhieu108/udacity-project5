@@ -24,7 +24,6 @@ spec:
           - containerPort: 3000
         readinessProbe:
           httpGet:
-            host: 0.0.0.0
             port: 3000
             path: /?name=Reviewer
   strategy:
