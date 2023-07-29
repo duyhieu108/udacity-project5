@@ -40,7 +40,7 @@ jobs:
       - run:
           name: Build docker image
           command: |
-            docker build --cache-from=myapp --tag=myapp .
+            docker build --cache-from=myapp -t myapp -t myapp:${CIRCLE_WORKFLOW_ID:0:7} -t myapp:latest .
             docker images
 
       - run:
@@ -61,7 +61,7 @@ jobs:
             echo "Docker ID and Image: $docker_path"
             export mypw=hnplhh1008
             echo "$mypw" | docker login -u $docker_path -p $mypw
-            docker image tag "myapp" "$docker_path/myapp:${CIRCLE_WORKFLOW_ID:0:7}"
+            #docker image tag "myapp" "$docker_path/myapp:${CIRCLE_WORKFLOW_ID:0:7}"
             docker image tag "myapp" "$docker_path/myapp:latest"
             docker image push "$docker_path/myapp:latest"
 
@@ -147,27 +147,27 @@ workflows:
           requires: [linting]
           filters:
             branches:
-              only: [main]
+              only: [master]
       - deploy-infrastructure:
           requires: [build-docker-image]
           filters:
             branches:
-              only: [main]
+              only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
           filters:
             branches:
-              only: [main]
+              only: [master]
       - create-deployment:
           requires: [configure-infrastructure]
           filters:
             branches:
-              only: [main]
+              only: [mamasterin]
       - aws-eks/update-container-image:
           requires: [create-deployment]
           filters:
             branches:
-              only: [main]
+              only: [master]
           cluster-name: k8s-project5
           container-image-updates: "rolling-container=hieudd/myapp:latest"
           resource-name: deployment/myapp
