@@ -147,7 +147,7 @@ workflows:
           requires: [linting]
           filters:
             branches:
-              only: [master]
+              only: [main]
       - deploy-infrastructure:
           requires: [build-docker-image]
           filters:
