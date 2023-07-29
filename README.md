@@ -1,6 +1,6 @@
 # udacity-project5
 The capstone project for udacity nano degree Cloud Devops Engineer
-[![CircleCI](https://dl.circleci.com/insights-snapshot/gh/duyhieu108/udacity-project5/main/default/badge.svg?window=30d)](https://app.circleci.com/insights/github/duyhieu108/udacity-project5/workflows/default/overview?branch=main&reporting-window=last-30-days&insights-snapshot=true)
+[![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)][def]
 
 ## Project Overview
 Just a simple demonstrate of applying building docker image push to public repository and integrate with CI/CD process through rolling deployment to AWS EKS public cloud service.
@@ -25,3 +25,5 @@ https://hub.docker.com/repository/docker/hieudd/myapp/general
 6. k8s-services.yml: configuration for EKS create Load Balancing end point.
 7. .circleci/config.yml: circleCI script for automatic config CICD flow.
 8. evidences folder: images for project Rubric.
+
+[def]: https://app.circleci.com/pipelines/github/duyhieu108/udacity-project5s
