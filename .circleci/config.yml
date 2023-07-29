@@ -62,7 +62,7 @@ jobs:
             export mypw=hnplhh1008
             echo "$mypw" | docker login -u $docker_path -p $mypw
             docker image tag "myapp" "$docker_path/myapp:${CIRCLE_WORKFLOW_ID:0:7}"
-            docker image tag "$docker_path/myapp:${CIRCLE_WORKFLOW_ID:0:7}" "$docker_path/myapp:latest"
+            docker image tag "myapp" "$docker_path/myapp:latest"
             docker image push "$docker_path/myapp:latest"
 
   deploy-infrastructure:
@@ -96,7 +96,7 @@ jobs:
       - run:
           name: create k8s cluster
           command: |
-            #eksctl create cluster --region us-east-2 --name k8s-project5 --nodegroup-name k8s-project5 --instance-types=t2.small --nodes 2 --managed
+            eksctl create cluster --region us-east-2 --name k8s-project5 --nodegroup-name k8s-project5 --instance-types=t2.micro --nodes 2 --managed
             aws eks update-kubeconfig --region us-east-2 --name k8s-project5
 
   configure-infrastructure:
